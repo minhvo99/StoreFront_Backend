@@ -56,20 +56,6 @@ npm run prettier
 
 ---
 
-## How to use
 
-The API offers one endpoint to access and resize images available in the `./assest/image/full` folder.
-
-The endpoint is `api/image` and requires three query params:
-
-| Query Param |                                     Value                                     |
-| ----------- | :---------------------------------------------------------------------------: |
-| filename    | the filename (without extension) of one of the images available in the folder |
-| height      |                        it should be a positive integer                        |
-| width       |                        it should be a positive integer                        |
-
-Note that full instructions including a preview of all the available images and their filenames can be accessed using the main API endpoint. Assuming the app is running on port 3000 that would be:
-
-[http://localhost:3000](http://localhost:3000)
 
 
