@@ -5,10 +5,10 @@ import { authorization } from "../middleware/authorization";
 const userRouter = express.Router();
 const userHandler = new UserHandlers();
 
-userRouter.get("/users", userHandler.index);
-userRouter.get("/users/:id", userHandler.show);
-userRouter.post("/users", userHandler.create);
-userRouter.put("/users/:id", authorization, userHandler.update);
-userRouter.delete("/users/:id", authorization, userHandler.deleteUser);
+userRouter.get("/", userHandler.index);
+userRouter.get("/:id", userHandler.show);
+userRouter.post("/", userHandler.create);
+userRouter.put("/:id", authorization, userHandler.update);
+userRouter.delete("/:id", authorization, userHandler.deleteUser);
 
 export default userRouter;

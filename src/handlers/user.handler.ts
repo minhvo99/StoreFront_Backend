@@ -18,13 +18,13 @@ export default class UserHandlers {
       }
       async show(req: Request, res: Response) {
             try {
-                  const id = req.params.id as unknown as number;
+                  const id = parseInt(req.params.id);
                   if (!id) return res.status(400).send(`Missing required parameter id: ${id}`);
                   const users: BaseUser = await user.show(id);
                   res.json(users);
             } catch (error) {
                   res.status(400);
-                  res.json({ error });
+                  res.json(error);
             }
       }
       async create(req: Request, res: Response) {
@@ -54,7 +54,7 @@ export default class UserHandlers {
             try {
                   if (!baseUser.firstname || !baseUser.lastname || !baseUser.id) {
                         res.status(400);
-                        res.json("Some required parameters are missing! eg. :firstName, :lastName, :id");
+                        res.json(`Params ${baseUser} invalid`);
                         return false;
                   }
                   const u = await user.update(baseUser);
@@ -68,11 +68,11 @@ export default class UserHandlers {
             try {
                   const id = parseInt(req.params.id);
                   if (!id) {
-                        res.status(400).send("Missing required parameter :id.");
+                        res.status(400).send("Required parameter :id.");
                         return false;
                   }
                   await user.deleteUser(id);
-                  res.send(`User with id ${id} successfully deleted.`);
+                  res.send(200).json('Delete successfully!!!.');
             } catch (err) {
                   res.status(400).json(err);
             }
