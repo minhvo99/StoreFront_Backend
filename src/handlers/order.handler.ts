@@ -54,9 +54,7 @@ export default class OrderHandler {
                         product_id: parseInt(req.body.product_id),
                         quantity: parseInt(req.body.quantity),
                   };
-                  console.log(addOrder);
-
-                  if (!addOrder.order_id || !addOrder.product_id || !addOrder.quantity) {
+                  if (  !addOrder.product_id || !addOrder.quantity) {
                         return res.status(400).json({
                               error: "Missing required parameters",
                         });
@@ -67,7 +65,7 @@ export default class OrderHandler {
                   res.status(200).json(product);
             } catch (error) {
                   res.sendStatus(400);
-                  throw new Error(`Error: ${error}`);
+                  throw new Error('Can not add product to order');
             }
       }
 
@@ -96,8 +94,6 @@ export default class OrderHandler {
       async delete(req: Request, res: Response) {
             try {
                   const id = parseInt(req.params.id);
-                  console.log(id);
-
                   const result = await orders.delete(id);
                   res.status(200).json(result);
             } catch (error) {

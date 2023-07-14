@@ -83,7 +83,7 @@ export class OrderModel {
                   const { rows } = await conn.query(sql, [id]);
                   conn.release();
 
-                  return rows;
+                  return rows[0];
             } catch (err) {
                   throw new Error(`Error: ${err}`);
             }

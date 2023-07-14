@@ -130,8 +130,7 @@ var OrderHandler = /** @class */ (function () {
                             product_id: parseInt(req.body.product_id),
                             quantity: parseInt(req.body.quantity),
                         };
-                        console.log(addOrder);
-                        if (!addOrder.order_id || !addOrder.product_id || !addOrder.quantity) {
+                        if (!addOrder.product_id || !addOrder.quantity) {
                             return [2 /*return*/, res.status(400).json({
                                     error: "Missing required parameters",
                                 })];
@@ -144,7 +143,7 @@ var OrderHandler = /** @class */ (function () {
                     case 2:
                         error_4 = _a.sent();
                         res.sendStatus(400);
-                        throw new Error("Error: ".concat(error_4));
+                        throw new Error('Can not add product to order');
                     case 3: return [2 /*return*/];
                 }
             });
@@ -189,7 +188,6 @@ var OrderHandler = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         id = parseInt(req.params.id);
-                        console.log(id);
                         return [4 /*yield*/, orders.delete(id)];
                     case 1:
                         result = _a.sent();

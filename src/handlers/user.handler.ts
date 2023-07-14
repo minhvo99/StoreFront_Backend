@@ -66,15 +66,15 @@ export default class UserHandlers {
 
       async deleteUser(req: Request, res: Response) {
             try {
-                  const id = parseInt(req.params.id);
+                  const id = parseInt(req.params.id);    
                   if (!id) {
-                        res.status(400).send("Required parameter :id.");
+                        res.status(400).json("Required parameter :id.");
                         return false;
                   }
-                  await user.deleteUser(id);
-                  res.send(200).json("Delete successfully!!!.");
+                   await user.deleteUser(id);
+                  res.status(200).json({ status: `Deleted user ${id}` });
             } catch (err) {
-                  res.status(400).json(err);
+                  res.status(400).json(`Can not delete user ${req.params.id}: ${err}`);
             }
       }
 }

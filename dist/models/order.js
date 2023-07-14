@@ -183,7 +183,7 @@ var OrderModel = /** @class */ (function () {
                     case 2:
                         rows = (_a.sent()).rows;
                         conn.release();
-                        return [2 /*return*/, rows];
+                        return [2 /*return*/, rows[0]];
                     case 3:
                         err_5 = _a.sent();
                         throw new Error("Error: ".concat(err_5));

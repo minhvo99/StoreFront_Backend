@@ -166,17 +166,17 @@ var UserHandlers = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         id = parseInt(req.params.id);
                         if (!id) {
-                            res.status(400).send("Required parameter :id.");
+                            res.status(400).json("Required parameter :id.");
                             return [2 /*return*/, false];
                         }
                         return [4 /*yield*/, user.deleteUser(id)];
                     case 1:
                         _a.sent();
-                        res.send(200).json("Delete successfully!!!.");
+                        res.status(200).json({ status: "Deleted user ".concat(id) });
                         return [3 /*break*/, 3];
                     case 2:
                         err_3 = _a.sent();
-                        res.status(400).json(err_3);
+                        res.status(400).json("Can not delete user ".concat(req.params.id, ": ").concat(err_3));
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }

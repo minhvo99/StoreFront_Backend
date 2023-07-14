@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { Secret } from "jsonwebtoken";
 import dotenv from "dotenv";
+import { User } from "../interfaces/user.interface";
 dotenv.config();
 const SERECT = process.env.SECRET_KEY as Secret;
 
@@ -23,3 +24,6 @@ export const authorization = (req: Request, res: Response, next: NextFunction) =
             return;
       }
 };
+export const token = (user: User): string => {
+      return jwt.sign(user, SERECT)
+}

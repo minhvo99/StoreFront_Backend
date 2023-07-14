@@ -7,60 +7,6 @@ Build a JavaScript API based on a requirements given by the stakeholders.
 This section contains all the packages used in this project and how to install them.
 `npm install`
 
-### Packages
-
-#### express
-
-`npm i -S express`
-`npm i -D @types/express`
-
-#### typescript
-
-`npm i -D typescript`
-
-#### db-migrate
-
-`npm install -g db-migrate`
-
-#### g
-
-`npm install -g n`
-
-#### rimraf
-
-`npm install --save rimraf`
-
-#### cors
-
-`npm install --save cors`
-
-#### bcrypt
-
-`npm -i bcrypt`
-`npm -i -D @types/bcrypt`
-
-#### morgan
-
-`npm install --save morgan`
-`npm -i -D @types/morgan`
-
-### nodemon
-
-`npm i nodemon`
-
-#### jsonwebtoken
-
-`npm install jsonwebtoken --sav`
-`npm -i -D @types/jsonwebtoken`
-
-#### jasmine
-
-`npm install jasmine @types/jasmine @ert78gb/jasmine-ts ts-node --save-dev`
-
-#### supertest
-
-`npm i supertest`
-`npm i --save-dev @types/supertest`
 
 ## Set up Database
 
@@ -71,7 +17,7 @@ This section contains all the packages used in this project and how to install t
 
 ### Start
 
-`npm run start` to start the app and get access via http://127.0.0.1:
+`npm run start` to start the app and get access via http://localhost:3000:
 
 ### Create Databases
 
@@ -83,7 +29,7 @@ We shall create the dev and test database.
 
 Navigate to the root directory and run the command below to migrate the database
 
-`yarn dev-up`
+`npm db-up`
 
 ## Environmental Variables Set up
 
@@ -92,22 +38,20 @@ Bellow are the environmental variables that needs to be set in a `.env` file. Th
 **NB:** The given values are used in development and testing but not in production.
 
 ```
-PORT=127.0.0.1
-POSTGRES_HOST="localhost"
-POSTGRES_USER="###"
-POSTGRES_PASSWORD="###"
-POSTGRES_DB="storefront"
-POSTGRES_TEST_DB="storefront"
-TOKEN_KEY=###
-ENV=test
-BCRYPT_PASSWORD=###
-SALT_ROUNDS="10"
+POSTGRES_HOST=localhost
+POSTGRES_DB=book_store
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+ENV=dev
+SECRET_KEY=JWTABC
+BCRYPT_PASSWORD=minhdeptrai123   
+SALT_ROUNDS=10
 
 ```
 
 ## Start App
 
-`yarn watch` or `npm run start`
+`npm run watch` 
 
 ### Running Ports
 
@@ -122,7 +66,7 @@ All endpoints are described in the [REQUIREMENT.md](REQUIREMENTS.md) file.
 Tokens are passed along with the http header as
 
 ```
-Authorization   Bearer <token>
+Authorization   Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMSwidXNlcm5hbWUiOiJBQk5WIiwiZmlyc3RuYW1lIjoiQiIsImxhc3RuYW1lIjoiTmd1eWVuIFZhbiIsInBhc3N3b3JkX2RpZ2VzdCI6IiQyYiQxMCRVRUZodExFNTNZQTc3UHBVNHczQzB1dW1VR1M4SjJuc1MzTjQvdFJSd3UwMWlYd3IycWl4bSJ9LCJpYXQiOjE2ODkxNTQ2OTF9.VOi3RLqeOoYLMbq56NbxdPHSRh3YuASsO7fFAeJ1LhM
 ```
 
 ## Testing
