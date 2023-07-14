@@ -1,18 +1,18 @@
 {
-     "dev": {
-        "driver": "pg",
-        "host": "127.0.0.1",
-        "port": 5432,
-        "database": "book_store",
-        "user": "postgres",
-        "password": "postgres"
-    },
-    "test": {
-        "driver": "pg",
-        "host": "127.0.0.1",
-        "port": 5433,
-        "database": "book_store",
-        "admin": "postgres",
-        "password": "postgres"
-    }
-  }
+      "dev": {
+            "driver": "pg",
+            "host": "127.0.0.1",
+            "port": 5432,
+            "database": "book_store",
+            "user": "postgres",
+            "password": "postgres"
+      },
+      "test": {
+            "driver": "pg",
+            "host": "127.0.0.1",
+            "port": 5433,
+            "database": "book_store",
+            "admin": "postgres",
+            "password": "postgres"
+      }
+}

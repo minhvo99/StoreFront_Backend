@@ -55,7 +55,6 @@ export default class OrderHandler {
                         quantity: parseInt(req.body.quantity),
                   };
                   console.log(addOrder);
-                  
 
                   if (!addOrder.order_id || !addOrder.product_id || !addOrder.quantity) {
                         return res.status(400).json({
@@ -98,7 +97,7 @@ export default class OrderHandler {
             try {
                   const id = parseInt(req.params.id);
                   console.log(id);
-                  
+
                   const result = await orders.delete(id);
                   res.status(200).json(result);
             } catch (error) {

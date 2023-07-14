@@ -172,7 +172,7 @@ var UserHandlers = /** @class */ (function () {
                         return [4 /*yield*/, user.deleteUser(id)];
                     case 1:
                         _a.sent();
-                        res.send(200).json('Delete successfully!!!.');
+                        res.send(200).json("Delete successfully!!!.");
                         return [3 /*break*/, 3];
                     case 2:
                         err_3 = _a.sent();

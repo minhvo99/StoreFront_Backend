@@ -72,7 +72,7 @@ export default class UserHandlers {
                         return false;
                   }
                   await user.deleteUser(id);
-                  res.send(200).json('Delete successfully!!!.');
+                  res.send(200).json("Delete successfully!!!.");
             } catch (err) {
                   res.status(400).json(err);
             }

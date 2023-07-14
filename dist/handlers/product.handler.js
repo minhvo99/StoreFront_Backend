@@ -102,7 +102,7 @@ var ProductHandler = /** @class */ (function () {
                             id: req.body.id,
                             name: req.body.name,
                             price: req.body.price,
-                            description: req.body.description
+                            description: req.body.description,
                         };
                         return [4 /*yield*/, product.create(p)];
                     case 1:
@@ -127,7 +127,7 @@ var ProductHandler = /** @class */ (function () {
                             id: parseInt(req.params.id),
                             name: req.body.name,
                             price: req.body.price,
-                            description: req.body.description
+                            description: req.body.description,
                         };
                         _a.label = 1;
                     case 1:

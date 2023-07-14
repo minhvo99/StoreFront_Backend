@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const SERECT = process.env.SECRET_KEY as Secret;
 
- export const authorization = (req: Request, res: Response, next: NextFunction) =>{
+export const authorization = (req: Request, res: Response, next: NextFunction) => {
       if (!req.headers.authorization) {
             res.sendStatus(401);
             res.json("Access denied, invalid token");
@@ -14,7 +14,7 @@ const SERECT = process.env.SECRET_KEY as Secret;
             const authorizationHeader = req.headers["authorization"];
             const token = authorizationHeader?.split(" ")[1];
             jwt.verify(token, SERECT, (err, data) => {
-                  if(err) res.sendStatus(403)
+                  if (err) res.sendStatus(403);
                   next();
             });
       } catch (error) {
@@ -22,4 +22,4 @@ const SERECT = process.env.SECRET_KEY as Secret;
             res.json("Access denied, invalid token");
             return;
       }
-}
+};

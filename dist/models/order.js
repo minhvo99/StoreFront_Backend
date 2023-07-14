@@ -150,11 +150,11 @@ var OrderModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        orderProductsSql = 'DELETE FROM order_products WHERE order_id=($1)';
+                        orderProductsSql = "DELETE FROM order_products WHERE order_id=($1)";
                         return [4 /*yield*/, conn.query(orderProductsSql, [id])];
                     case 2:
                         _a.sent();
-                        sql = 'DELETE FROM orders  WHERE id=($1)';
+                        sql = "DELETE FROM orders  WHERE id=($1)";
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 3:
                         rows = (_a.sent()).rows;
