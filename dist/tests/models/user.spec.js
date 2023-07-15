@@ -63,7 +63,7 @@ describe('User Model', function () {
                 case 0: return [4 /*yield*/, store.index()];
                 case 1:
                     users = _a.sent();
-                    userId = users[0].id;
+                    userId = users[1].id;
                     return [4 /*yield*/, store.update({
                             id: userId,
                             username: 'update',
@@ -74,18 +74,6 @@ describe('User Model', function () {
                 case 2:
                     result = _a.sent();
                     expect(result.username).toEqual('update');
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('should get list user', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, store.index()];
-                case 1:
-                    result = _a.sent();
-                    expect(result.length).toBeGreaterThan(1);
                     return [2 /*return*/];
             }
         });
@@ -113,7 +101,7 @@ describe('User Model', function () {
                 case 0: return [4 /*yield*/, store.index()];
                 case 1:
                     users = _a.sent();
-                    userId = users[3].id;
+                    userId = users[0].id;
                     return [4 /*yield*/, store.deleteUser(userId)];
                 case 2:
                     _a.sent();

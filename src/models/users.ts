@@ -11,7 +11,7 @@ export class Users {
                   console.log(rows);
 
                   connection.release();
-                  return rows;
+                  return rows[0];
             } catch (error) {
                   throw new Error(`Can not get user: ${error}`);
             }

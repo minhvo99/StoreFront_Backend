@@ -61,7 +61,7 @@ var Users = /** @class */ (function () {
                         rows = (_a.sent()).rows;
                         console.log(rows);
                         connection.release();
-                        return [2 /*return*/, rows];
+                        return [2 /*return*/, rows[0]];
                     case 3:
                         error_1 = _a.sent();
                         throw new Error("Can not get user: ".concat(error_1));

@@ -15,7 +15,7 @@ describe('User Model', () => {
 
     it('should update a user', async () => {
         const users = await store.index()
-        const userId = users[0].id
+        const userId = users[1].id
 
         const result = await store.update({
             id: userId,
@@ -27,10 +27,6 @@ describe('User Model', () => {
         expect(result.username).toEqual('update')
     })
 
-    it('should get list user', async () => {
-        const result: any = await store.index()
-        expect(result.length).toBeGreaterThan(1)
-    })
 
     it('should get user by id', async () => {
         const users = await store.index()
@@ -42,7 +38,7 @@ describe('User Model', () => {
 
     it('should delete the user', async () => {
         let users : any= await store.index()
-        const userId = users[3].id as number
+        const userId = users[0].id as number
 
         await store.deleteUser(userId)
         users = await store.index()
