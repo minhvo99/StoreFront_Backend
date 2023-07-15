@@ -1,5 +1,5 @@
 import request from "request";
-import { token } from "../middleware/authorization";
+import { token } from "../../middleware/authorization";
 const endpoint = "http://localhost:3000/users";
 
 describe("User API", () => {

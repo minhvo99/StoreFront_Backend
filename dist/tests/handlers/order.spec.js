@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var request_1 = __importDefault(require("request"));
-var authorization_1 = require("../middleware/authorization");
+var authorization_1 = require("../../middleware/authorization");
 var endpoint = "http://localhost:3000/order";
 describe("Order API", function () {
     var user = {
