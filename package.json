@@ -10,8 +10,13 @@
             "db-up": "db-migrate up",
             "jasmine": "jasmine",
             "db-down": "db-migrate down",
-            "test": "npm run build && npm run jasmine",
-            "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./dist --onSuccess \"node ./dist/index.js\""
+            "test": "db-migrate up -e test npm run build && set ENV=test && npm run jasmine ",
+            "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./dist --onSuccess \"node ./dist/index.js\"",
+            "create-dev-db": "db-migrate --config database_create.json db:create full_stack_dev && db-migrate up -e dev",
+            "create-test-db": "db-migrate --config database_create.json db:create full_stack_test",
+            "dev-migrations": "db-migrate up -e dev",
+            "reset-dev-db": "db-migrate reset -e dev",
+            "reset-test-db": "db-migrate reset -e test"
       },
       "author": "MinhVDV",
       "license": "ISC",
@@ -20,6 +25,7 @@
             "@types/helmet": "^4.0.0",
             "@types/jsonwebtoken": "^9.0.2",
             "@types/supertest": "^2.0.12",
+            "assert": "^2.0.0",
             "bcrypt": "^5.1.0",
             "body-parser": "^1.20.2",
             "cors": "^2.8.5",

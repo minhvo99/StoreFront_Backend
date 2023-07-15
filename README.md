@@ -28,6 +28,16 @@ We shall create the dev and test database.
 ### Migrate Database
 
 Navigate to the root directory and run the command below to migrate the database
+### Test mode
+To install the app's dependencies and use the app in test mode, run the following:
+
+`npm create-test-db`
+
+`npm create-test-db` runs a script that uses db-migrate to create a new database called `full_stack_test` and runs the migrations to create the tables. This script assumes you have installed `postgres` on your local system and the server is running.
+
+To run the tests execute `yarn test`.
+
+NOTE: It is not necessary to run `db-migrate up` at the command line as the scripts contain the necessary calls to operations. 
 
 `npm db-up`
 
@@ -39,7 +49,8 @@ Bellow are the environmental variables that needs to be set in a `.env` file. Th
 
 ```
 POSTGRES_HOST=localhost
-POSTGRES_DB=book_store
+DEV_POSTGRES_DB=full_stack_dev
+TEST_POSTGRES_DB=full_stack_test
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 ENV=dev
