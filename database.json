@@ -2,15 +2,15 @@
       "dev": {
             "driver": "pg",
             "host": "localhost",
-            "database": {"ENV": "DEV_POSTGRES_DB"},
-            "user": {"ENV": "POSTGRES_USER"},
-            "password": {"ENV": "POSTGRES_PASSWORD"}
+            "database": "full_stack_dev",
+            "user": "postgres",
+            "password": "postgres"
       },
       "test": {
             "driver": "pg",
             "host": "localhost",
-            "database": {"ENV": "DEV_POSTGRES_DB"},
-            "user": {"ENV": "POSTGRES_USER"},
-            "password": {"ENV": "POSTGRES_PASSWORD"}
-      }
+            "database": "full_stack_test",
+            "user": "postgres",
+            "password": "postgres"
+      }, "sql-file" : true
 }

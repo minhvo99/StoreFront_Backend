@@ -10,7 +10,7 @@
             "db-up": "db-migrate up",
             "jasmine": "jasmine",
             "db-down": "db-migrate down",
-            "test": "db-migrate up -e test npm run build && set ENV=test && npm run jasmine ",
+            "test": "db-migrate -e test up && set ENV=test&&  npm run build && jasmine && db-migrate reset -e test",
             "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./dist --onSuccess \"node ./dist/index.js\"",
             "create-dev-db": "db-migrate --config database_create.json db:create full_stack_dev && db-migrate up -e dev",
             "create-test-db": "db-migrate --config database_create.json db:create full_stack_test",
@@ -36,6 +36,7 @@
             "jsonwebtoken": "^9.0.1",
             "migrate": "^2.0.0",
             "pg": "^8.11.1",
+            "supertest": "^6.3.3",
             "tsc-watch": "^6.0.4",
             "uuid": "^9.0.0"
       },

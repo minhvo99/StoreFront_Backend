@@ -1,22 +1,21 @@
 import client from "../configs/database";
 import bcrypt from "bcrypt";
-import { BaseUser, User } from "../interfaces/user.interface";
+import { User } from "../interfaces/user.interface";
 
 export class Users {
-      async index(): Promise<BaseUser> {
+      async index(): Promise<User[]> {
             try {
                   const connection = await client.connect();
                   const sql = "SELECT * FROM users";
-                  const { rows } = await connection.query(sql);
-                  console.log(rows);
-
+                  const result = await connection.query(sql);
                   connection.release();
-                  return rows[0];
+                  return result.rows;
+                  
             } catch (error) {
                   throw new Error(`Can not get user: ${error}`);
             }
       }
-      async show(id: number): Promise<BaseUser> {
+      async show(id: number): Promise<User> {
             try {
                   const sql = "SELECT * FROM users WHERE id=($1)";
                   const connection = await client.connect();
@@ -46,7 +45,7 @@ export class Users {
                   throw new Error(`unable create user (${user.username}): ${err}`);
             }
       }
-      async update(newUserData: BaseUser): Promise<User> {
+      async update(newUserData: User): Promise<User> {
             try {
                   const sql =
                         "UPDATE users SET firstname = $2, lastname = $3, username = $4, password_digest = $5 WHERE id = $1 RETURNING *";

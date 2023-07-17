@@ -47,7 +47,7 @@ var Users = /** @class */ (function () {
     }
     Users.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var connection, sql, rows, error_1;
+            var connection, sql, result, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -58,10 +58,9 @@ var Users = /** @class */ (function () {
                         sql = "SELECT * FROM users";
                         return [4 /*yield*/, connection.query(sql)];
                     case 2:
-                        rows = (_a.sent()).rows;
-                        console.log(rows);
+                        result = _a.sent();
                         connection.release();
-                        return [2 /*return*/, rows[0]];
+                        return [2 /*return*/, result.rows];
                     case 3:
                         error_1 = _a.sent();
                         throw new Error("Can not get user: ".concat(error_1));

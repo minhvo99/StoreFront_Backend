@@ -65,7 +65,7 @@ export default class OrderHandler {
                   res.status(200).json(product);
             } catch (error) {
                   res.sendStatus(400);
-                  throw new Error('Can not add product to order');
+                  throw new Error(`Can not add product to order: ${error}}`);
             }
       }
 

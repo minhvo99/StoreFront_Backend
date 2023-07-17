@@ -143,7 +143,7 @@ var OrderHandler = /** @class */ (function () {
                     case 2:
                         error_4 = _a.sent();
                         res.sendStatus(400);
-                        throw new Error('Can not add product to order');
+                        throw new Error("Can not add product to order: ".concat(error_4, "}"));
                     case 3: return [2 /*return*/];
                 }
             });

@@ -2,7 +2,7 @@ import jwt, { Secret } from "jsonwebtoken";
 import { Request, Response } from "express";
 import { Users } from "./../models/users";
 import dotenv from "dotenv";
-import { BaseUser, User } from "../interfaces/user.interface";
+import {  User } from "../interfaces/user.interface";
 dotenv.config();
 const SERECT = process.env.SECRET_KEY as Secret;
 const user = new Users();
@@ -10,7 +10,7 @@ const user = new Users();
 export default class UserHandlers {
       async index(req: Request, res: Response) {
             try {
-                  const users: BaseUser = await user.index();
+                  const users: User[] = await user.index();
                   res.json(users);
             } catch (error) {
                   throw new Error(`Error: ${error}`);
@@ -20,7 +20,7 @@ export default class UserHandlers {
             try {
                   const id = parseInt(req.params.id);
                   if (!id) return res.status(400).send(`Missing required parameter id: ${id}`);
-                  const users: BaseUser = await user.show(id);
+                  const users: User = await user.show(id);
                   res.json(users);
             } catch (error) {
                   res.status(400);
@@ -44,7 +44,7 @@ export default class UserHandlers {
             }
       }
       async update(req: Request, res: Response) {
-            const baseUser: BaseUser = {
+            const baseUser: User = {
                   id: req.body.id,
                   firstname: req.body.firstname,
                   lastname: req.body.lastname,
