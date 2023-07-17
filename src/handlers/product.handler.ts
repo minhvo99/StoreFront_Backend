@@ -2,7 +2,7 @@ import { Products } from "../models/product";
 import express from "express";
 import dotenv from "dotenv";
 import jwt, { Secret } from "jsonwebtoken";
-import { Product } from "../interfaces/product..interface";
+import { Product } from "../interfaces/product.interface";
 
 dotenv.config();
 const product = new Products();

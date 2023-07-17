@@ -1,5 +1,5 @@
 import client from "../configs/database";
-import { Product } from "../interfaces/product..interface";
+import { Product } from "../interfaces/product.interface";
 
 export class Products {
       async index(): Promise<Product[]> {

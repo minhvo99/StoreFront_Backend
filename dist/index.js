@@ -18,3 +18,4 @@ app.use("", index_route_1.default);
 app.listen(port, function () {
     console.log("Server is running on port http://localhost:".concat(port));
 });
+exports.default = app;

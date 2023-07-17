@@ -1,91 +1,78 @@
-// import { OrderModel } from '../../models/order'
-// import { Products } from '../../models/product'
-// import { Users } from '../../models/users'
+import { Product } from "../../interfaces/product.interface";
+import { User } from "../../interfaces/user.interface";
+import { OrderModel } from "../../models/order";
+import { Products } from "../../models/product";
+import { Users } from "../../models/users";
 
-// const store = new OrderModel()
-// const productStore = new Products()
-// const userStore = new Users()
-// let productId: number, userId: number
+const orders = new OrderModel();
+const prd = new Products();
+const users = new Users();
 
-// describe('Order Model', () => {
-//     beforeAll(async () => {
-//         const product = await productStore.create({
-//             name: 'Superman underroos',
-//             price: 40.0,
-//             description: 'Underwear',
-//         })
-//         const user = await userStore.create({
-//             username: 'ssmith',
-//             firstname: 'Sallie',
-//             lastname: 'Test',
-//             password_digest: 'password123',
-//         })
-//     })
+let productId: number, userId: number;
 
-//     afterAll(async () => {
-//         await productStore.delete(productId)
-//         await userStore.deleteUser(userId)
-//     })
+describe("Order Model", () => {
+  const p : Product = {
+    name: "Test product",
+    price: 400,
+    description: "test product",
+  };
+  const u : User = { 
+    username: "test",
+    firstname: "test",
+    lastname: "test",
+    password_digest: "password123",
+  };
+ 
+  beforeAll(async () => {
+    const createOrder = async () => {
+      const product: any = await prd.create(p);
+      productId = product.id as number;
+    };
+    const createUser = async () => {
+      const user = await users.create(u);
+      userId = user.id as number;
+    };
+    createOrder();
+    createUser();
+  });
 
-//     it('should create an order', async () => {
-//         const result = await store.create({
-//             user_id: userId,
-//             status: 'new',
-//             quantity: 10,
-//         })
-//         expect(result).toEqual({
-//             id: 1,
-//             product_id: productId,
-//             quantity: 10,
-//             user_id: userId,
-//             status: 'new',
-//         })
-//     })
+  afterAll(async () => {   
+    await prd.delete(productId);
+    await users.deleteUser(userId);
+  });
 
-//     it('should return a list of orders', async () => {
-//         const result = await store.getOrders()
-//         expect(result).toEqual([
-//             {
-//                 id: 1,
-//                 product_id: productId,
-//                 quantity: 10,
-//                 user_id: userId,
-//                 status: 'new',
-//             },
-//         ])
-//     })
+  it("should create an order", async () => {
+    const result: any = await orders.create({
+      user_id: 1,
+      status: "new",
+    });
+    expect(result.user_id).toEqual(1);
+    await orders.delete(1);
+  });
 
-//     it('should return the correct order', async () => {
-//         const result = await store.getOrderById(1)
-//         expect(result).toEqual({
-//             id: 1,
-//             product_id: productId,
-//             quantity: 10,
-//             user_id: userId,
-//             status: 'new',
-//         })
-//     })
+  it("should return a list of orders", async () => {
+    const rs = await orders.create({
+      user_id: 1,
+      status: "new",
+    });    
+    const result: any = await orders.index();
+    expect(result.user_id).toEqual(1);
+    await orders.delete(rs.id as number);
+  });
 
-//     it('should update order status', async () => {
-//         const result = await store.updateOrder({
-//             id: 1,
-//             product_id: productId,
-//             quantity: 10,
-//             user_id: userId,
-//             status: 'complete',
-//         })
-//         expect(result).toEqual({
-//             id: 1,
-//             product_id: productId,
-//             quantity: 10,
-//             user_id: userId,
-//             status: 'complete',
-//         })
-//     })
+  it("should return the correct order", async () => {
+    const createOrder = await orders.create({
+      user_id: 1,
+      status: "new",
+    });
+    const orderId = createOrder.id as number; 
+    const result = await orders.show(orderId);
+    expect(result).toEqual({
+      id: '3' as unknown as number,
+      user_id: 1,
+      status: "new",
+    });
+    await orders.delete(orderId);
+  });
 
-//     it('should delete the order', async () => {
-//         await store.deleteOrder(1)
-//         const result = await store.getOrders()
-//         expect(result).toEqual([])
-//     })
-// })
+});

@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var users_1 = require("../../models/users");
+var users_1 = require("./../../models/users");
 var store = new users_1.Users();
 describe("User Model", function () {
     it("should create a user", function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -45,42 +45,52 @@ describe("User Model", function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, store.create({
                         username: "test",
-                        firstname: "test",
-                        lastname: "test",
-                        password_digest: "postgres",
+                        firstname: "Sallie",
+                        lastname: "Test",
+                        password_digest: "password123",
                     })];
                 case 1:
                     result = _a.sent();
-                    expect(result.username).toEqual('test');
+                    expect(result.username).toEqual("test");
                     return [2 /*return*/];
             }
         });
     }); });
-    it("should return list user", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var users;
+    it("should update a user", function () { return __awaiter(void 0, void 0, void 0, function () {
+        var users, userId, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, store.index()];
                 case 1:
                     users = _a.sent();
-                    expect(users.length).toEqual(0);
+                    userId = users[0].id;
+                    return [4 /*yield*/, store.update({
+                            id: userId,
+                            username: "updated",
+                            firstname: "updated",
+                            lastname: "updated",
+                            password_digest: "password123",
+                        })];
+                case 2:
+                    result = _a.sent();
+                    expect(result.username).toEqual("updated");
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should return a list of users', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should return a list of users", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, store.index()];
                 case 1:
                     result = _a.sent();
-                    expect(result.length).toEqual(0);
+                    expect(result.length).toEqual(1);
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should return the correct user', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should return the correct user", function () { return __awaiter(void 0, void 0, void 0, function () {
         var users, userId, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -91,12 +101,12 @@ describe("User Model", function () {
                     return [4 /*yield*/, store.show(userId)];
                 case 2:
                     result = _a.sent();
-                    expect(result.username).toEqual('test');
+                    expect(result.username).toEqual("updated");
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should delete the user', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should delete the user", function () { return __awaiter(void 0, void 0, void 0, function () {
         var users, userId;
         return __generator(this, function (_a) {
             switch (_a.label) {

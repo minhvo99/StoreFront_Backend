@@ -1,60 +1,125 @@
-// import request from "request";
-// import { token } from "../../middleware/authorization";
-// const endpoint = "http://localhost:3000/users";
+import supertest from 'supertest'
+import app from '../..';
+const request = supertest(app)
+import { token } from "../../middleware/authorization";
 
-// describe("User API", () => {
-//       const user = {
-//             firstname: "test",
-//             lastname: "test",
-//             username: "admin",
-//             password_digest: "123",
-//       };
-//       it("should return list user", (done) => {
-//             request.get(endpoint, (err, res) => {
-//                   expect(res.statusCode).toEqual(200);
-//                   done();
-//             });
-//       });
-//       it("should return user bt id", (done) => {
-//             request.get(`${endpoint}/1`, (err, res) => {
-//                   expect(res.statusCode).toEqual(200);
-//                   done();
-//             });
-//       });
-//       it("should create user", (done) => {
-//             request.post(endpoint, { json: true, body: user }, (err, res) => {
-//                   expect(res.statusCode).toEqual(201);
-//                   done();
-//             });
-//       });
-//       it("should update user", (done) => {
-//             request.put(
-//                   `${endpoint}/6`,
-//                   {
-//                         json: true,
-//                         auth: { bearer: token(user) },
-//                         body: {
-//                               id: "8",
-//                               firstname: "updated",
-//                               lastname: "updated",
-//                               username: "admin",
-//                               password_digest: "1234",
-//                         },
-//                   },
-//                   (err, res) => {
-//                         expect(res.statusCode).toEqual(200);
-//                         done();
-//                   }
-//             );
-//       });
-//       it('should delete user', (done) => {
-//         request.delete(`${endpoint}/8`,{
-//             json: true,
-//             auth: { bearer: token(user) }
-//       },
-//       (err, res) => {
-//             expect(res.statusCode).toEqual(200);
-//             done();
-//       })
-//       });
-// });
+const user = {
+      id: 1,
+      username: 'testUser',
+      password_digest: 'password123',
+}
+const auth = token(user)
+describe('Users API ', () => {
+      it('/users/create should return a user', () => {
+          const data = {
+              username: 'test',
+              first_name: 'test',
+              last_name: 'test',
+              password: 'password123',
+          }
+          request
+              .post('/api/users/create')
+              .send(data)
+              .expect('Content-Type', 'application/json')
+              .expect(201)
+              .expect({
+                  id: 1,
+                  username: 'test',
+                  first_name: 'test',
+                  last_name: 'test',
+              })
+      })
+  
+      it('/users/create should fail if required username is not sent', () => {
+          const data = {
+              first_name: 'test',
+              last_name: 'test',
+              password: 'password123',
+          }
+          request
+              .post('/api/users/create')
+              .set('Authorization', `Bearer ${auth}`)
+              .send(data)
+              .expect('Content-Type', 'application/json')
+              .expect(400)
+              .expect({
+                  error: 'Missing username or password',
+              })
+      })
+  
+      it('/users/create should fail if required password is not sent', () => {
+          const data = {
+              username: 'test',
+              first_name: 'test',
+              last_name: 'test',
+          }
+          request
+              .post('/api/users/create')
+              .set('Authorization', `Bearer ${auth}`)
+              .send(data)
+              .expect('Content-Type', 'application/json')
+              .expect(400)
+              .expect({
+                  error: 'Missing username or password',
+              })
+      })
+  
+      it('/users should return all users', () => {
+          request
+              .get('/api/users')
+              .set('Authorization', `Bearer ${auth}`)
+              .expect(200)
+              .expect('Content-Type', 'application/json')
+              .expect([
+                  {
+                      id: 1,
+                      username: 'test',
+                      first_name: 'test',
+                      last_name: 'test',
+                  },
+              ])
+      })
+  
+      it('/users/:id should show a user', () => {
+          request
+              .get('/api/users/1')
+              .set('Authorization', `Bearer ${auth}`)
+              .expect('Content-Type', 'application/json')
+              .expect(200)
+              .expect({
+                  id: 1,
+                  first_name: 'test',
+                  last_name: 'test',
+                  password_digest: 'password123',
+              })
+      })
+  
+      it('/users/:id should update a user', () => {
+          const data = {
+              username: 'madison',
+              first_name: 'Madison',
+              last_name: 'Smith',
+              password_digest: 'password123',
+          }
+          request
+              .put('/api/users/1')
+              .set('Authorization', `Bearer ${auth}`)
+              .send(data)
+              .expect('Content-Type', 'application/json')
+              .expect('Content-Type', /json/)
+              .expect(200)
+              .expect({
+                  id: 1,
+                  username: 'madison',
+                  first_name: 'Madison',
+                  last_name: 'Smith',
+                  password_digest: 'password123',
+              })
+      })
+  
+      it('/users/:id should delete a user', () => {
+          request.delete('/api/users/1').expect(200).expect({
+              status: 'Deleted user 1',
+          })
+      })
+  })

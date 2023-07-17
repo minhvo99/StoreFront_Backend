@@ -17,7 +17,10 @@ This section contains all the packages used in this project and how to install t
 
 ### Start
 
-`npm run start` to start the app and get access via http://localhost:3000:
+`npm run start` or `npm run watch` to start the app and get access via http://localhost:3000:
+
+### Test
+`npm run test` to test
 
 ### Create Databases
 
@@ -39,7 +42,7 @@ To run the tests execute `yarn test`.
 
 NOTE: It is not necessary to run `db-migrate up` at the command line as the scripts contain the necessary calls to operations. 
 
-`npm db-up`
+`npm dev-migrations`
 
 ## Environmental Variables Set up
 
